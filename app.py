@@ -37,7 +37,9 @@ st.markdown("""
     }
 
     /* Container styling */
-    .main .block-container {
+    .main .block-container,
+    [data-testid="stAppViewBlockContainer"],
+    [data-testid="stMainBlockContainer"] {
         background-color: rgba(255, 255, 255, 0.97);
         border-radius: 20px;
         padding: 2.5rem;
@@ -195,6 +197,9 @@ st.markdown("""
     }
 
     /* Info box */
+    .info-box, .info-box * {
+        color: #0d3c61;
+    }
     .info-box {
         background: #e3f2fd;
         border-left: 5px solid #2196f3;
@@ -204,6 +209,9 @@ st.markdown("""
     }
 
     /* Success box */
+    .success-box, .success-box * {
+        color: #1b4d20;
+    }
     .success-box {
         background: #e8f5e9;
         border-left: 5px solid #4caf50;
@@ -213,9 +221,11 @@ st.markdown("""
     }
 
     /* Footer */
+    .app-footer, .app-footer * {
+        color: #4a4a5c !important;
+    }
     .app-footer {
         text-align: center;
-        color: #7a7a8c;
         padding: 1.5rem 0 0.5rem 0;
     }
 
