@@ -24,42 +24,77 @@ st.set_page_config(
 # Custom CSS for beautiful design
 st.markdown("""
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Poppins', sans-serif;
+    }
+
     /* Main theme */
     .stApp {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 55%, #6f42c1 100%);
+        background-attachment: fixed;
     }
-    
+
     /* Container styling */
     .main .block-container {
-        background-color: white;
+        background-color: rgba(255, 255, 255, 0.97);
         border-radius: 20px;
-        padding: 2rem;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        padding: 2.5rem;
+        box-shadow: 0 20px 60px rgba(31, 12, 74, 0.25);
+        max-width: 1200px;
     }
-    
+
     /* Header styling */
     .main-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 15px;
+        background: linear-gradient(120deg, #667eea 0%, #764ba2 60%, #a05fd1 100%);
+        padding: 2.5rem 2rem;
+        border-radius: 18px;
         color: white;
         text-align: center;
         margin-bottom: 2rem;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.35);
+        animation: fadeInDown 0.6s ease;
     }
-    
+
     .main-header h1 {
         margin: 0;
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 2.6rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
     }
-    
+
     .main-header p {
-        margin: 0.5rem 0 0 0;
-        font-size: 1.1rem;
-        opacity: 0.9;
+        margin: 0.6rem 0 0 0;
+        font-size: 1.15rem;
+        font-weight: 400;
+        opacity: 0.92;
     }
-    
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-16px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        border-bottom: 2px solid #eef0fb;
+    }
+
+    .stTabs [data-baseweb="tab"] {
+        border-radius: 10px 10px 0 0;
+        padding: 0.6rem 1.4rem;
+        font-weight: 600;
+        color: #667eea;
+        background-color: #f5f7fd;
+    }
+
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white !important;
+    }
+
     /* Metric cards */
     .metric-card {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -67,56 +102,67 @@ st.markdown("""
         border-radius: 15px;
         text-align: center;
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        border: 1px solid rgba(102, 126, 234, 0.15);
     }
-    
+
     .metric-card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(102, 126, 234, 0.25);
     }
-    
+
     .metric-card h3 {
         margin: 0;
         color: #667eea;
         font-size: 1rem;
         font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    
+
     .metric-card p {
         margin: 0.5rem 0 0 0;
         font-size: 2rem;
         font-weight: 700;
         color: #333;
     }
-    
+
     /* Result card */
     .result-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 2rem;
-        border-radius: 15px;
+        border-radius: 18px;
         color: white;
         text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
         margin: 2rem 0;
+        animation: fadeInDown 0.5s ease;
     }
-    
+
     .result-card h2 {
         margin: 0;
         font-size: 2rem;
         font-weight: 700;
     }
-    
+
     .result-card .cluster-number {
         font-size: 4rem;
         font-weight: 900;
         margin: 1rem 0;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
     }
-    
+
     /* Sidebar styling */
-    .css-1d391kg {
-        background: linear-gradient(180deg, #f5f7fa 0%, #c3cfe2 100%);
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #f5f7fa 0%, #dfe4f3 100%);
+        border-right: 1px solid rgba(102, 126, 234, 0.15);
     }
-    
+
+    [data-testid="stSidebar"] h2 {
+        color: #4b3f8f;
+        font-weight: 700;
+    }
+
     /* Button styling */
     .stButton>button {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -126,31 +172,55 @@ st.markdown("""
         border-radius: 10px;
         font-weight: 600;
         font-size: 1rem;
-        transition: all 0.3s ease;
+        transition: all 0.25s ease;
         box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        width: 100%;
     }
-    
+
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 7px 20px rgba(102, 126, 234, 0.6);
+        box-shadow: 0 8px 22px rgba(102, 126, 234, 0.55);
     }
-    
+
+    /* Sliders */
+    .stSlider [data-baseweb="slider"] > div > div {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    }
+
+    /* Dataframes */
+    [data-testid="stDataFrame"] {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    }
+
     /* Info box */
     .info-box {
         background: #e3f2fd;
         border-left: 5px solid #2196f3;
-        padding: 1rem;
+        padding: 1rem 1.2rem;
         border-radius: 10px;
         margin: 1rem 0;
     }
-    
+
     /* Success box */
     .success-box {
         background: #e8f5e9;
         border-left: 5px solid #4caf50;
-        padding: 1rem;
+        padding: 1rem 1.2rem;
         border-radius: 10px;
         margin: 1rem 0;
+    }
+
+    /* Footer */
+    .app-footer {
+        text-align: center;
+        color: #7a7a8c;
+        padding: 1.5rem 0 0.5rem 0;
+    }
+
+    .app-footer p {
+        margin: 0.25rem 0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -160,12 +230,12 @@ st.markdown("""
 def load_models():
     """Load trained model and scaler"""
     try:
-        model = joblib.load('models/kmeans_model.pkl')
-        scaler = joblib.load('models/scaler.pkl')
-        feature_names = joblib.load('models/feature_names.pkl')
+        model = joblib.load('model_files/kmeans_model.pkl')
+        scaler = joblib.load('model_files/scaler.pkl')
+        feature_names = joblib.load('model_files/feature_names.pkl')
         return model, scaler, feature_names
     except FileNotFoundError:
-        st.error("❌ Model files not found! Please ensure the models folder exists with required files.")
+        st.error("❌ Model files not found! Please ensure the model_files folder exists with required files.")
         return None, None, None
 
 # Main header
@@ -500,7 +570,7 @@ if model is not None:
 # Footer
 st.markdown("---")
 st.markdown("""
-<div style='text-align: center; color: #666; padding: 2rem;'>
+<div class="app-footer">
     <p>🎓 <strong>Machine Learning for Python Programming Course</strong></p>
     <p>Built with ❤️ using Streamlit | © 2026</p>
 </div>
